@@ -1,0 +1,254 @@
+
+*,
+*::before,
+*::after {
+    margin:0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: sans-serif;
+}
+
+
+body {
+    box-sizing: border-box;
+    color:#fff;
+    font-size: 2rem;
+}
+
+#root {
+    background-color: #61dbfb;
+    min-height:100vh;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #393f49;
+    border-radius: .5rem;
+    max-width: 65%;
+    margin: 10rem auto;
+    padding: 6rem;
+}
+
+/*
+-----------------------------
+-----------HEADER------------
+-----------------------------
+*/
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading-2 {
+    font-size: 2.2rem;
+}
+
+.header__activities {
+    font-size: 1.5rem;
+    color:#5dcbe9;
+}
+
+/*
+-----------------------------
+------INPUT COMPONENT--------
+-----------------------------
+*/
+
+.form-add__input {
+    width:50%;
+    font-size: 1.8rem;
+    color:#555;
+    padding:1rem;
+    border-radius: .3rem;
+    outline:none;
+    border: 2px solid #fff;
+}
+
+.form-add__input::placeholder{
+    color:#a7aaaf;
+}
+
+.form-add__input:focus {
+    border: 2px solid #5dcbe9;
+}
+.form-add__button {
+    border:none;
+    outline: none;
+    border-radius: .3rem;
+    background-color: #61dbfb;
+    font-size: 1.8rem;
+    padding: 1.2rem 2rem;
+    color:#fff;
+    margin-left: 1.5rem;
+    cursor: pointer;
+}
+
+.form-add__button:hover{
+    background-color: #49bbd9;
+}
+
+.form-add__button:active {
+    background-color: #3da4bf;
+}
+
+/*
+-----------------------------
+-----------LIST--------------
+-----------------------------
+*/
+
+.list{
+    border-top: 2px solid #63686f;
+}
+
+.list__item {
+    display: flex;
+    align-items: center;
+    padding:2rem 0;
+    border-bottom: 2px solid #63686f;
+    position: relative;
+}
+
+.list__item-title {
+    flex:1;
+    display: flex;
+    align-items: center;
+    margin-right: 2.5rem;
+}
+
+.list__item-title input[type="checkbox"]{
+    display: none;
+}
+
+.list__item-text {
+    display: inline-block;
+    margin-left: 2.5rem;
+    margin-right: 1rem;
+    flex:1;
+}
+
+.edit-message {
+    font-family: inherit;
+    align-self: center;
+    font-size: inherit;
+    resize: none;
+    border:none;
+    outline: none;
+    padding:1rem;   
+    border-radius: 3px;
+    border: 2px solid #fff;
+
+}
+
+.edit-message:focus {
+    border: 2px solid #5dcbe9;
+}
+
+.edit-message__toolbar {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-field {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+}
+
+.edit-field__content {
+    display: flex;
+    flex:1;
+}
+
+.btn {
+    color:#63686f;
+    font-size: 2.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.btn-delete:hover {
+    color:#ec2626;
+}
+
+.btn-checked:hover {
+    color: #28d250;
+}
+
+.btn-edit {
+    font-size: 2.3rem;
+    margin-right: 3rem;
+}
+
+.btn-edit:hover {
+    color: #dcdcdd;
+}
+
+.btn-confirm, .btn-cancel {
+    font-size: 2.7rem;
+}
+
+.btn-confirm {
+    margin-bottom: 1.5rem;
+    color: #28d250;
+}
+
+.btn-cancel {
+    color:#ec2626;
+}
+
+/*
+-----------------------------
+---------HELPERS-------------
+-----------------------------
+*/
+
+.checked {
+    color: #28d250;
+}
+
+.line-through {
+    text-decoration: line-through;
+    color: #63686f;
+}
+
+.error-field {
+    color:#ec2626;
+    font-size: 1.3rem;
+}
+
+.error-field-1{
+    margin-bottom: 3.5rem;
+    margin-top: 1rem;
+}
+
+.error-field-2{
+    position: absolute;
+    bottom: 1.3rem;
+    left: 5rem;
+}
+
+.unvisible {
+    display: none;
+}
+
+
+/*
+-----------------------------
+---------UTILITIES-----------
+-----------------------------
+*/
+
+.mt-md {
+    margin-top: 3.5rem;
+}
+
+.mb-md {
+    margin-bottom: 3.5rem;
+}
