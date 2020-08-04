@@ -42,6 +42,7 @@ body {
 }
 
 .header__activities {
+    margin-top: .8rem;
     font-size: 1.5rem;
     color:#5dcbe9;
 }
@@ -258,10 +259,6 @@ body {
 
 .unvisible {
     display: none;
-}
-
-.no-activities{
-    font-size: 1.5rem;
 }
 
 /*

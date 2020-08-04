@@ -57,7 +57,7 @@ class App extends React.Component {
             deleteTodo={ this.deleteTodo } 
             toggleTodo={ this.toggleTodo }
             updateTodo={ this.updateTodo }
-        /> : <p className="no-activities">No tasks</p>;
+        /> : null;
     }
 
     render() {
