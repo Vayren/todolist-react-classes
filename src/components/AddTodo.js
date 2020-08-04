@@ -41,28 +41,26 @@ class AddTodo extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                <div className="from-container mt-md">
-                    <form className="form-add">
-                        <input 
-                            className="form-add__input" 
-                            type="text" value={this.state.todo} 
-                            placeholder="Enter a task..."
-                            onChange={ e => this.setState({todo: e.target.value}) } 
-                            ref={this.inputRef}
-                        />
-                        <button 
-                            className="form-add__button"
-                            onClick={ this.onButtonClick }
-                        >
-                            Add Task
-                        </button>
-                    </form>
-                </div>
-                <div className="error-field error-field-1">
+            <div className="from-container">
+                <form className="form-add">
+                    <input 
+                        className="form-add__input" 
+                        type="text" value={this.state.todo} 
+                        placeholder="Enter a task..."
+                        onChange={ e => this.setState({todo: e.target.value}) } 
+                        ref={this.inputRef}
+                    />
+                    <button 
+                        className="form-add__button"
+                        onClick={ this.onButtonClick }
+                    >
+                        Add Task
+                    </button>
+                </form>
+                <div className="error-message error-message-1">
                     {this.showError(this.state.isEmptyField)}
                 </div>
-            </React.Fragment>
+            </div>
         );
     }
 }

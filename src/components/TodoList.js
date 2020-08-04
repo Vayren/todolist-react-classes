@@ -23,7 +23,7 @@ const TodoList = ({ todoList, deleteTodo, toggleTodo, updateTodo }) => {
     };
 
     return (
-        <div className="list mt-md">
+        <div className="list">
            {renderList(todoList)}
         </div>
     );

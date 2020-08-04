@@ -56,15 +56,15 @@ class EditField extends React.Component {
 
     render() {
         return (
-            <div className="edit-field" ref={this.editBlock}>
-                <div className="edit-field__content">
+            <div className="edit-container" ref={this.editBlock}>
+                <div className="edit-container__inner">
                     <input 
-                        className="list__item-text edit-message" 
+                        className="list__item-text edit-field" 
                         value={ this.state.editValue } 
                         ref={ this.editField }
                         onChange={this.onEditFieldChange}
                     />
-                    <div className="edit-message__toolbar">
+                    <div className="edit-field__toolbar">
                         <button className="btn btn-confirm" onClick={this.confirm}>
                             <FontAwesomeIcon icon={faCheckCircle}/>
                         </button>
@@ -73,7 +73,7 @@ class EditField extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div className="error-field error-field-2">
+                <div className="error-message error-message-2">
                     { this.showError(this.state.isEmptyField) }
                 </div>
             </div>

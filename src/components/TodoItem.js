@@ -27,6 +27,7 @@ class TodoItem extends React.Component {
 
         return (
             <div className="list__item" key={itemId}>
+                
                 <div className="list__item-title">
                     <label 
                         className={`btn btn-checked ${checked ? '' : 'checked'}`}
@@ -35,19 +36,20 @@ class TodoItem extends React.Component {
                     >
                         <FontAwesomeIcon icon={faCheckCircle} /> 
                     </label>
-                    <input type="checkbox" id="check"/>
+                    <input type="checkbox" id="check" className="list__input-checkbox"/>
 
                     {this.state.isEdit ? 
                         <EditField value={title} id={itemId} updateTodo={updateTodo} hideEdit={this.hideEdit}/> :
+
                         <span className={`list__item-text ${checked ? '' : 'line-through'} ${this.state.isEdit ? 'unvisible' : '' }` } 
                             ref={this.titleRef}
                         >
-                                {title}
+                            {title}
                         </span> 
                     }
-                    
                 </div>
-                <div className="btn-group">
+
+                <div className="list__item-toolbar">
                     <button className={`btn btn-edit ${this.state.isEdit ? 'unvisible' : '' }`} onClick={ this.showEdit }>
                         <FontAwesomeIcon icon={faPencilAlt} />
                     </button>
@@ -55,6 +57,7 @@ class TodoItem extends React.Component {
                         <FontAwesomeIcon icon={faTrashAlt} />    
                     </button>
                 </div>
+
             </div>
         );
     }

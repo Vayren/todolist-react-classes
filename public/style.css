@@ -12,11 +12,9 @@ html {
     font-family: sans-serif;
 }
 
-
 body {
     box-sizing: border-box;
     color:#fff;
-    font-size: 2rem;
 }
 
 #root {
@@ -25,7 +23,7 @@ body {
     overflow: hidden;
 }
 
-.container {
+.app-container {
     background-color: #393f49;
     border-radius: .5rem;
     max-width: 65%;
@@ -38,12 +36,8 @@ body {
 -----------HEADER------------
 -----------------------------
 */
-.header {
-    display: flex;
-    justify-content: space-between;
-}
 
-.heading-2 {
+.header__date {
     font-size: 2.2rem;
 }
 
@@ -54,12 +48,20 @@ body {
 
 /*
 -----------------------------
-------INPUT COMPONENT--------
+----------FORM---------------
 -----------------------------
 */
 
+.from-container {
+    margin-top: 3.5rem;
+}
+
+.form-add {
+    display: flex;
+}
+
 .form-add__input {
-    width:50%;
+    flex-basis:50%;
     font-size: 1.8rem;
     color:#555;
     padding:1rem;
@@ -102,6 +104,7 @@ body {
 */
 
 .list{
+    margin-top: 3.5rem;
     border-top: 2px solid #63686f;
 }
 
@@ -118,9 +121,10 @@ body {
     display: flex;
     align-items: center;
     margin-right: 2.5rem;
+    font-size: 2rem;
 }
 
-.list__item-title input[type="checkbox"]{
+.list__input-checkbox{
     display: none;
 }
 
@@ -131,7 +135,13 @@ body {
     flex:1;
 }
 
-.edit-message {
+/*
+-----------------------------
+--------EDIT FIELD-----------
+-----------------------------
+*/
+
+.edit-field {
     font-family: inherit;
     align-self: center;
     font-size: inherit;
@@ -144,25 +154,31 @@ body {
 
 }
 
-.edit-message:focus {
+.edit-field:focus {
     border: 2px solid #5dcbe9;
 }
 
-.edit-message__toolbar {
+.edit-field__toolbar {
     display: flex;
     flex-direction: column;
 }
 
-.edit-field {
+.edit-container {
     display: flex;
     flex-direction: column;
     flex:1;
 }
 
-.edit-field__content {
+.edit-container__inner {
     display: flex;
     flex:1;
 }
+
+/*
+-----------------------------
+---------BUTTONS-------------
+-----------------------------
+*/
 
 .btn {
     color:#63686f;
@@ -205,6 +221,28 @@ body {
 
 /*
 -----------------------------
+---------ERROR-------------
+-----------------------------
+*/
+
+.error-message {
+    color:#ec2626;
+    font-size: 1.3rem;
+}
+
+.error-message-1{
+    margin-bottom: 3.5rem;
+    margin-top: 1rem;
+}
+
+.error-message-2{
+    position: absolute;
+    bottom: 1.3rem;
+    left: 5rem;
+}
+
+/*
+-----------------------------
 ---------HELPERS-------------
 -----------------------------
 */
@@ -218,37 +256,58 @@ body {
     color: #63686f;
 }
 
-.error-field {
-    color:#ec2626;
-    font-size: 1.3rem;
-}
-
-.error-field-1{
-    margin-bottom: 3.5rem;
-    margin-top: 1rem;
-}
-
-.error-field-2{
-    position: absolute;
-    bottom: 1.3rem;
-    left: 5rem;
-}
-
 .unvisible {
     display: none;
 }
 
 
-/*
------------------------------
----------UTILITIES-----------
------------------------------
-*/
-
-.mt-md {
-    margin-top: 3.5rem;
+@media only screen and (max-width: 1200px) {
+    .app-container {
+        max-width: 85%;
+        margin: 5rem auto;
+    }
 }
 
-.mb-md {
-    margin-bottom: 3.5rem;
+@media only screen and (max-width: 1000px) {
+    .app-container {
+        max-width: 100%;
+        margin: 0rem auto;
+        border-radius: 0;
+        min-height: 100vh;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    html{
+        font-size: 50%;
+    }
+
+    .app-container {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    .form-add__input {
+        flex:1;   
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .app-container {
+        padding-top: 4rem;
+    }
+    .list__item-title {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        font-size: 2rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    html {
+        font-size: 45%;
+    }
+
 }

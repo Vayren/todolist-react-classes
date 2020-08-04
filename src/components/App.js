@@ -63,12 +63,10 @@ class App extends React.Component {
     render() {
         this.persistData();
         return (
-            <div className="container">
+            <div className="app-container">
                 <div className="header">
-                    <div className="header__details">
-                        <h2 className="heading-2">{this.getDate()}</h2>
-                        <p className="header__activities">{`${this.state.todoList.filter( item => item.status).length} Active Tasks`}</p> 
-                    </div>
+                    <h2 className="header__date">{this.getDate()}</h2>
+                    <p className="header__activities">{`${this.state.todoList.filter( item => item.status).length} Active Tasks`}</p> 
                 </div>
                 <AddTodo addTodo={ this.addTodo } />
                 {this.renderTodo()}
