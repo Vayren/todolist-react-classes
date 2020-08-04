@@ -130,10 +130,8 @@ body {
 }
 
 .list__item-text {
-    display: inline-block;
-    margin-left: 2.5rem;
-    margin-right: 3.5rem;
     flex:1;
+    margin: 0 2.5rem;
 }
 
 /*
@@ -162,6 +160,7 @@ body {
 .edit-field__toolbar {
     display: flex;
     flex-direction: column;
+    margin-right: 2.5rem;
 }
 
 .edit-container {
