@@ -58,11 +58,12 @@ body {
 
 .form-add {
     display: flex;
+    font-size: 1.8rem;
 }
 
 .form-add__input {
     flex-basis:50%;
-    font-size: 1.8rem;
+    font-size: inherit;
     color:#555;
     padding:1rem;
     border-radius: .3rem;
@@ -78,11 +79,11 @@ body {
     border: 2px solid #5dcbe9;
 }
 .form-add__button {
+    font-size: inherit;
     border:none;
     outline: none;
     border-radius: .3rem;
     background-color: #61dbfb;
-    font-size: 1.8rem;
     padding: 1.2rem 2rem;
     color:#fff;
     margin-left: 1.5rem;
@@ -120,7 +121,6 @@ body {
     flex:1;
     display: flex;
     align-items: center;
-    margin-right: 2.5rem;
     font-size: 2rem;
 }
 
@@ -131,7 +131,7 @@ body {
 .list__item-text {
     display: inline-block;
     margin-left: 2.5rem;
-    margin-right: 1rem;
+    margin-right: 3.5rem;
     flex:1;
 }
 
@@ -260,6 +260,15 @@ body {
     display: none;
 }
 
+.no-activities{
+    font-size: 1.5rem;
+}
+
+/*
+-----------------------------
+---------ADAPTIVE------------
+-----------------------------
+*/
 
 @media only screen and (max-width: 1200px) {
     .app-container {
@@ -303,6 +312,10 @@ body {
     .btn {
         font-size: 2rem;
     }
+
+    .error-message-2{
+        bottom: .7rem;
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -310,4 +323,15 @@ body {
         font-size: 45%;
     }
 
+    .app-container {
+        padding: 3rem 2.5rem 0 2.5rem;
+    }
+
+    .form-add {
+        font-size: 1.5rem;
+    }
+
+    .list__item-text {
+        margin: 0 1.5rem;
+    }
 }
