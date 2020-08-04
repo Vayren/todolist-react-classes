@@ -7,36 +7,37 @@ class AddTodo extends React.Component {
         super(props);
         this.state = { 
             todo: '',
-            isEmptyField: false
+            showErrorField: false
         };
         this.inputRef = React.createRef();
     }
-    state = {todo: ''}
 
+
+    //Delete error message when add-field lost the focus
     componentDidMount() {
-        this.inputRef.current.onblur = () => this.isEmpty(false);
+        this.inputRef.current.onblur = () => this.setEmpty(false);
     }
 
-    onButtonClick = e => {
+
+    onAddButtonClick = e => {
         e.preventDefault(); 
         if(this.state.todo !== ''){
             this.props.addTodo(this.state.todo);
-            this.isEmpty(false);
+            this.setEmpty(false);
             this.setState({ todo: '' });
         }
         else {
-            this.isEmpty(true);
+            this.setEmpty(true);
             this.inputRef.current.focus();
         }
     }
 
-    
-    showError(status){
-        return status ? <ErrorMessage message="Please, enter a task!"/> : null;
+    showError(isError){
+        return isError ? <ErrorMessage message="Please, enter a task!"/> : null;
     }
 
-    isEmpty = flag => {
-        this.setState({ isEmptyField: flag })
+    setEmpty = flag => {
+        this.setState({ showErrorField: flag })
     }
 
     render() {
@@ -52,13 +53,13 @@ class AddTodo extends React.Component {
                     />
                     <button 
                         className="form-add__button"
-                        onClick={ this.onButtonClick }
+                        onClick={ this.onAddButtonClick }
                     >
                         Add Task
                     </button>
                 </form>
                 <div className="error-message error-message-1">
-                    {this.showError(this.state.isEmptyField)}
+                    {this.showError(this.state.showErrorField)}
                 </div>
             </div>
         );

@@ -66,7 +66,7 @@ class App extends React.Component {
             <div className="app-container">
                 <div className="header">
                     <h2 className="header__date">{this.getDate()}</h2>
-                    <p className="header__activities">{`${this.state.todoList.filter( item => item.status).length} Active Tasks`}</p> 
+                    <p className="header__activities">{`${this.state.todoList.filter( item => item.status).length} Active dsTasks`}</p> 
                 </div>
                 <AddTodo addTodo={ this.addTodo } />
                 {this.renderTodo()}

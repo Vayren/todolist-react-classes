@@ -12,6 +12,7 @@ class EditField extends React.Component {
             editValue: this.props.value,
             isEmptyField: false
         };
+
         this.editField = createRef();
         this.editBlock = createRef();
     }
@@ -20,17 +21,9 @@ class EditField extends React.Component {
         this.editField.current.focus();
 
         this.editField.current.onkeydown = e => {
-            if(e.code === 'Enter') this.enterPressed();
-            else if(e.code === 'Escape') this.escPressed();
+            if(e.code === 'Enter') this.confirm();
+            else if(e.code === 'Escape') this.props.hideEdit();
         }
-    }
-
-    enterPressed = () => {
-        this.confirm();
-    }
-
-    escPressed = () => {
-        this.cancel();
     }
 
     onEditFieldChange = e => {
@@ -39,19 +32,20 @@ class EditField extends React.Component {
 
     confirm = () => {
         if(this.state.editValue === '') {
-            this.setState({ isEmptyField: true })
+            this.setEmpty(true);
+            this.editField.current.focus();
         } else {
             this.props.hideEdit();
             this.props.updateTodo(this.props.id, this.state.editValue);
         }
     }
 
-    cancel = () => {
-        this.props.hideEdit();
-    }
-
     showError(status){
         return status ? <ErrorMessage message="Please, type something or hit escape!"/> : null;
+    }
+
+    setEmpty = flag => {
+        this.setState({ isEmptyField: flag })
     }
 
     render() {
@@ -68,7 +62,7 @@ class EditField extends React.Component {
                         <button className="btn btn-confirm" onClick={this.confirm}>
                             <FontAwesomeIcon icon={faCheckCircle}/>
                         </button>
-                        <button className="btn btn-cancel" onClick={this.cancel}>
+                        <button className="btn btn-cancel" onClick={this.props.hideEdit}>
                             <FontAwesomeIcon icon={faTimesCircle}/>
                         </button>
                     </div>
