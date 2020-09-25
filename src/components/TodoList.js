@@ -1,32 +1,34 @@
 import React from 'react';
 
 import TodoItem from './TodoItem';
-//<textarea rows="1">{item.title}</textarea>  
-//<span className={`list__item-text ${item.status ? '' : 'line-through'}`} >{item.title}</span> 
 
-const TodoList = ({ todoList, deleteTodo, toggleTodo, updateTodo }) => {
+class TodoList extends React.Component {
 
-    const renderList = list => {
-        return list.map( item => {
+    renderList = list => {
+        return list.map(item => {
             return (
-            < TodoItem 
-                itemId={item.id} 
-                checked={item.status} 
-                toggleTodo={toggleTodo} 
-                deleteTodo={deleteTodo} 
-                updateTodo={updateTodo}
-                title={item.title} 
-                key={item.id}
-            />
+                < TodoItem
+                    itemId={item.id}
+                    checked={item.status}
+                    toggleTodo={this.props.toggleTodo}
+                    deleteTodo={this.props.deleteTodo}
+                    updateTodo={this.props.updateTodo}
+                    priority={item.priority}
+                    title={item.title}
+                    key={item.id}
+                />
             );
         });
-    };
+    }
 
-    return (
-        <div className="list">
-           {renderList(todoList)}
-        </div>
-    );
-};
+    render() {
+        return (
+            <div className="list">
+                {this.renderList(this.props.todoList)}
+            </div>
+        );
+    }
+}
+
 
 export default TodoList;
