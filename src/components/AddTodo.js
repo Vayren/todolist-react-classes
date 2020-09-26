@@ -26,7 +26,6 @@ class AddTodo extends React.Component {
     onAddButtonClick = e => {
         e.preventDefault();
         if (this.state.todo !== '') {
-            console.log(this.state.priority);
             this.props.addTodo(this.state.todo, this.state.priority);
             this.setEmpty(false);
             this.setState({ todo: '' });

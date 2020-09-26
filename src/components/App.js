@@ -1,5 +1,6 @@
 import React from 'react';
 import uniqid from 'uniqid';
+import _ from 'lodash';
 
 import AddTodo from './AddTodo'
 import TodoList from './TodoList';
@@ -7,7 +8,8 @@ import TodoList from './TodoList';
 class App extends React.Component {
 
     state = {
-        todoList: this.restoreDate(),
+        todoList: this.restoreList(),
+        todoOrder: this.restoreOrder(),
         buttons: {
             all: true,
             active: false,
@@ -15,12 +17,20 @@ class App extends React.Component {
         }
     };
 
-    restoreDate() {
-        return JSON.parse(localStorage.getItem('todoList')) || [];
+    restoreList() {
+        return JSON.parse(localStorage.getItem('todoList')) || {};
     }
 
-    persistData() {
+    restoreOrder() {
+        return JSON.parse(localStorage.getItem('todoOrder')) || [];
+    }
+
+    persistList() {
         localStorage.setItem('todoList', JSON.stringify(this.state.todoList));
+    }
+
+    persistOrder() {
+        localStorage.setItem('todoOrder', JSON.stringify(this.state.todoOrder));
     }
 
     getDate() {
@@ -32,33 +42,38 @@ class App extends React.Component {
     }
 
     addTodo = (title, priority) => {
-        const newTodo = { id: uniqid(), title, status: true, priority };
-        this.setState({ todoList: [...this.state.todoList, newTodo] });
+        const id = uniqid();
+        const newTodo = [{ id, title, status: true, priority }];
+
+        this.setState(
+            {
+                todoList: { ...this.state.todoList, ..._.mapKeys(newTodo, 'id') },
+                todoOrder: [...this.state.todoOrder, id]
+            }
+        );
     }
 
     deleteTodo = id => {
-        this.setState({ todoList: this.state.todoList.filter(item => item.id !== id) });
+        this.setState(
+            {
+                todoList: _.omit(this.state.todoList, id),
+                todoOrder: this.state.todoOrder.filter(itemId => itemId !== id)
+            });
     }
 
     updateTodo = (id, title, priority) => {
-        this.setState({
-            todoList: [...this.state.todoList.map(item => {
-                if (item.id === id) {
-                    item.title = title;
-                    item.priority = priority;
-                }
-                return item;
-            })]
-        });
+        const updatedTodo = this.state.todoList[id];
+        updatedTodo.title = title;
+        updatedTodo.priority = priority;
+
+        this.setState({ todoList: { ...this.state.todoList, [id]: updatedTodo } });
     }
 
     toggleTodo = id => {
-        this.setState({
-            todoList: this.state.todoList.map(item => {
-                if (item.id === id) item.status = !item.status;
-                return item;
-            })
-        });
+        const toggledTodo = this.state.todoList[id];
+        toggledTodo.status = !toggledTodo.status;
+
+        this.setState({ todoList: { ...this.state.todoList, [id]: toggledTodo } });
     }
 
     setAllTasks = () => {
@@ -103,16 +118,16 @@ class App extends React.Component {
     }
 
     renderTodo() {
-        if (this.state.todoList.length) {
+        if (_.size(this.state.todoList)) {
 
             //render all tasks
             if (this.state.buttons.all) {
-                return this.renderSelectedTodo(this.state.todoList);
+                return this.renderSelectedTodo(Object.values(this.state.todoList));
             }
 
             //render active tasks
             else if (this.state.buttons.active) {
-                const activeTasks = this.state.todoList.filter(todo => todo.status);
+                const activeTasks = Object.values(this.state.todoList).filter(todo => todo.status);
 
                 if (activeTasks.length) {
                     return this.renderSelectedTodo(activeTasks);
@@ -125,7 +140,7 @@ class App extends React.Component {
 
             //render completed tasks
             else if (this.state.buttons.completed) {
-                const completedTasks = this.state.todoList.filter(todo => !todo.status);
+                const completedTasks = Object.values(this.state.todoList).filter(todo => !todo.status);
 
                 if (completedTasks.length) {
                     return this.renderSelectedTodo(completedTasks);
@@ -142,13 +157,18 @@ class App extends React.Component {
         }
     }
 
+    getActiveTasks = () => {
+        return Object.values(this.state.todoList).filter(item => item.status).length;
+    }
+
     render() {
-        this.persistData();
+        this.persistList();
+        this.restoreOrder();
         return (
             <div className="app-container">
                 <div className="header">
                     <h2 className="header__date">{this.getDate()}</h2>
-                    <p className="header__activities">{`${this.state.todoList.filter(item => item.status).length} Active Tasks`}</p>
+                    <p className="header__activities">{this.getActiveTasks()} Active Tasks</p>
                 </div>
                 <AddTodo addTodo={this.addTodo} />
                 {this.renderTodo()}
