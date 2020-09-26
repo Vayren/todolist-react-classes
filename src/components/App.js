@@ -1,6 +1,7 @@
 import React from 'react';
 import uniqid from 'uniqid';
 import _ from 'lodash';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import AddTodo from './AddTodo'
 import TodoList from './TodoList';
@@ -106,14 +107,40 @@ class App extends React.Component {
         })
     }
 
+    onDragEnd = result => {
+        const { destination, source, draggableId } = result;
+
+        if (!destination) return;
+
+        if (
+            destination.droppableId === source.droppableId &&
+            destination.index === source.index
+        ) {
+            return;
+        }
+
+        const newTodoOrder = Array.from(this.state.todoOrder);
+        newTodoOrder.splice(source.index, 1);
+        newTodoOrder.splice(destination.index, 0, draggableId);
+
+        this.setState({ todoOrder: newTodoOrder });
+    }
+
     renderSelectedTodo = todoList => {
         return (
-            <TodoList
-                todoList={todoList}
-                deleteTodo={this.deleteTodo}
-                toggleTodo={this.toggleTodo}
-                updateTodo={this.updateTodo}
-            />
+            <DragDropContext onDragEnd={this.onDragEnd}>
+                <Droppable droppableId={uniqid()}>
+                    {provided => (
+                        <TodoList
+                            todoList={todoList}
+                            deleteTodo={this.deleteTodo}
+                            toggleTodo={this.toggleTodo}
+                            updateTodo={this.updateTodo}
+                            provided={provided}
+                        />
+                    )}
+                </Droppable>
+            </DragDropContext>
         )
     }
 
@@ -122,12 +149,14 @@ class App extends React.Component {
 
             //render all tasks
             if (this.state.buttons.all) {
-                return this.renderSelectedTodo(Object.values(this.state.todoList));
+                const orderedList = this.state.todoOrder.map(itemId => this.state.todoList[itemId]);
+                return this.renderSelectedTodo(Object.values(orderedList));
             }
 
             //render active tasks
             else if (this.state.buttons.active) {
-                const activeTasks = Object.values(this.state.todoList).filter(todo => todo.status);
+                const orderedList = this.state.todoOrder.map(itemId => this.state.todoList[itemId]);
+                const activeTasks = Object.values(orderedList).filter(todo => todo.status);
 
                 if (activeTasks.length) {
                     return this.renderSelectedTodo(activeTasks);
@@ -140,7 +169,8 @@ class App extends React.Component {
 
             //render completed tasks
             else if (this.state.buttons.completed) {
-                const completedTasks = Object.values(this.state.todoList).filter(todo => !todo.status);
+                const orderedList = this.state.todoOrder.map(itemId => this.state.todoList[itemId]);
+                const completedTasks = Object.values(orderedList).filter(todo => !todo.status);
 
                 if (completedTasks.length) {
                     return this.renderSelectedTodo(completedTasks);
@@ -163,7 +193,7 @@ class App extends React.Component {
 
     render() {
         this.persistList();
-        this.restoreOrder();
+        this.persistOrder();
         return (
             <div className="app-container">
                 <div className="header">

@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 class TodoList extends React.Component {
 
     renderList = list => {
-        return list.map(item => {
+        return list.map((item, index) => {
             return (
                 < TodoItem
                     itemId={item.id}
@@ -16,6 +16,7 @@ class TodoList extends React.Component {
                     priority={item.priority}
                     title={item.title}
                     key={item.id}
+                    index={index}
                 />
             );
         });
@@ -23,8 +24,13 @@ class TodoList extends React.Component {
 
     render() {
         return (
-            <div className="list">
+            <div
+                className="list"
+                ref={this.props.provided.innerRef}
+                {...this.props.provided.droppableProps}
+            >
                 {this.renderList(this.props.todoList)}
+                {this.props.provided.placeholder}
             </div>
         );
     }
