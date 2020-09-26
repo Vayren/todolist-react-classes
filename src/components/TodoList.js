@@ -17,6 +17,7 @@ class TodoList extends React.Component {
                     title={item.title}
                     key={item.id}
                     index={index}
+                    dnd={this.props.dnd}
                 />
             );
         });

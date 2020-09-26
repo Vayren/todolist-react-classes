@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faPencilAlt, faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faBookmark, faGripLines } from '@fortawesome/free-solid-svg-icons';
 import { Draggable } from 'react-beautiful-dnd';
 
 import EditField from './EditField';
@@ -33,7 +33,6 @@ class TodoItem extends React.Component {
                         key={itemId}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
-                        {...provided.dragHandleProps}
                     >
 
                         <div className="list__item-title">
@@ -61,13 +60,21 @@ class TodoItem extends React.Component {
                             <button className={`btn btn-edit ${this.state.isEdit ? 'unvisible' : ''}`} onClick={this.showEdit}>
                                 <FontAwesomeIcon icon={faPencilAlt} />
                             </button>
-                            <button className="btn btn-delete" onClick={() => deleteTodo(itemId)}>
+                            <button className={`btn btn-delete ${this.state.isEdit ? 'unvisible' : ''}`} onClick={() => deleteTodo(itemId)}>
                                 <FontAwesomeIcon icon={faTrashAlt} />
                             </button>
+                            <button
+                                className={`btn btn-move ${this.state.isEdit || !this.props.dnd ? 'unvisible' : ''}`}
+                                {...provided.dragHandleProps}
+                            >
+                                <FontAwesomeIcon icon={faGripLines} />
+                            </button>
+
                         </div>
 
                     </div>
-                )}
+                )
+                }
             </Draggable>
         );
     }

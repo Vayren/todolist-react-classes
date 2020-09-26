@@ -210,7 +210,6 @@ body {
 .edit-field__toolbar {
     display: flex;
     flex-direction: column;
-    margin-right: 2.5rem;
 }
 
 .edit-container {
@@ -237,6 +236,10 @@ body {
     background-color: transparent;
     border: none;
     outline: none;
+}
+
+.btn-move {
+    margin-left: 3rem;
 }
 
 .btn-delete:hover {

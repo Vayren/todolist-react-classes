@@ -126,7 +126,7 @@ class App extends React.Component {
         this.setState({ todoOrder: newTodoOrder });
     }
 
-    renderSelectedTodo = todoList => {
+    renderSelectedTodo = (todoList, dnd) => {
         return (
             <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId={uniqid()}>
@@ -137,6 +137,7 @@ class App extends React.Component {
                             toggleTodo={this.toggleTodo}
                             updateTodo={this.updateTodo}
                             provided={provided}
+                            dnd={dnd}
                         />
                     )}
                 </Droppable>
@@ -150,7 +151,7 @@ class App extends React.Component {
             //render all tasks
             if (this.state.buttons.all) {
                 const orderedList = this.state.todoOrder.map(itemId => this.state.todoList[itemId]);
-                return this.renderSelectedTodo(Object.values(orderedList));
+                return this.renderSelectedTodo(Object.values(orderedList), true);
             }
 
             //render active tasks
@@ -159,7 +160,7 @@ class App extends React.Component {
                 const activeTasks = Object.values(orderedList).filter(todo => todo.status);
 
                 if (activeTasks.length) {
-                    return this.renderSelectedTodo(activeTasks);
+                    return this.renderSelectedTodo(activeTasks, false);
                 } else {
                     return (
                         <div className="empty-list">No active tasks</div>
@@ -173,7 +174,7 @@ class App extends React.Component {
                 const completedTasks = Object.values(orderedList).filter(todo => !todo.status);
 
                 if (completedTasks.length) {
-                    return this.renderSelectedTodo(completedTasks);
+                    return this.renderSelectedTodo(completedTasks, false);
                 } else {
                     return (
                         <div className="empty-list">No completed tasks</div>
