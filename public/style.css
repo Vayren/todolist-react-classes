@@ -200,7 +200,6 @@ body {
     padding:1rem;   
     border-radius: 3px;
     border: 2px solid #fff;
-
 }
 
 .edit-field:focus {
@@ -474,8 +473,8 @@ body {
        font-size: 3rem;  
     }
 
-    .list__item-text {
-        margin: 0 1.5rem;
+    .edit-field {
+        max-width:20rem;
     }
 
 }
